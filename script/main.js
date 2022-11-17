@@ -23,11 +23,13 @@ document.addEventListener("mousedown", function (event) {
         if (event.target.classList.contains("active")) {
             scoreCount++
             // reproduce the sound of a tap
-            let audio = new Audio("/assets/sounds/active.mp3")
+            let audio = new Audio("assets/sounds/correct.mp3")
             audio.play()
             navigator.vibrate(30)
         } else if (event.target.classList.contains("inactive")) {
             scoreCount-=2
+            let audio = new Audio("assets/sounds/wrong.mp3")
+            audio.play()
             navigator.vibrate(250)
         }
         // scoreCount always positive 
@@ -117,8 +119,6 @@ function startTimer() {
 function gameReset() {
     // write the score to the div finalScore
     // show a button to restart the game
-    let finalScore = document.getElementById("finalScore")
-    finalScore.innerHTML = scoreCount
     gameOver = true
     showRestartButton()
 }

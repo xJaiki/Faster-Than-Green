@@ -12,6 +12,14 @@ let col = document.createElement("div")
 col.classList.add("gameCol")
 let cells = col.getElementsByClassName("gameCell")
 let gameOver = false
+let score = document.getElementById("score")
+let highScore = document.getElementById("highScore")
+highScore.innerHTML = localStorage.getItem("highScore")
+localStorage.setItem("highScore", 0)
+
+console.log(localStorage)
+
+
 
 game()
 
@@ -25,9 +33,7 @@ function game() {
 
 // ANCHOR: TAP LOGIC
 let scoreCount = 0;
-
-
-document.addEventListener(input, function (event) {
+col.addEventListener(input, function (event) {
     if (!gameOver) {
         if (event.target.classList.contains("active")) {
             scoreCount++
@@ -113,7 +119,7 @@ col.addEventListener(input, function (event) {
     }
 })
 function startTimer() {
-    let time = 20
+    let time = 2
     let timer = setInterval(function () {
         time--
         document.getElementById("timer").innerHTML = time
@@ -135,6 +141,13 @@ function gameReset() {
         cells[i].classList.add("inactive")
     }
     showRestartButton()
+    // save high score
+    if (score.innerHTML > localStorage.getItem("highScore")) {
+        localStorage.setItem("highScore", score.innerHTML)
+        highScore.innerHTML = localStorage.getItem("highScore")
+    } else {
+        highScore.innerHTML = localStorage.getItem("highScore")
+    }
 }
 
 function showRestartButton() {

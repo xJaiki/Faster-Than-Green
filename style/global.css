@@ -82,9 +82,11 @@ body {
 }
 .active {
     background-color: #40ae87;
+    transition: 0.1s;
 } 
 .inactive {
     background-color: #ee6666;
+    transition: 0.1s;
 }
 .restart {
     display: none;

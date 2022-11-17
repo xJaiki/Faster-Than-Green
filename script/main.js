@@ -10,7 +10,7 @@ game()
 // ANCHOR: GAME SEQUENCE
 function game() {
     createGrid(5)
-    randomizeCells(cells, 10)
+    
     document.getElementById("gameContainer").appendChild(col)
 }
 
@@ -49,7 +49,7 @@ function createGrid(size) {
         for (let j = 0; j < size; j++) {
             let cell = document.createElement("div")
             cell.classList.add("gameCell")
-            cell.classList.add("inactive")
+            cell.classList.add("active")
             row.appendChild(cell)
         }
         col.appendChild(row)
@@ -100,6 +100,7 @@ let firstClick = true
 col.addEventListener("click", function (event) {
     if (firstClick) {
         firstClick = false
+        randomizeCells(cells, 10)
         startTimer()
     }
 })
@@ -117,9 +118,14 @@ function startTimer() {
 
 // ANCHOR: GAME RESET
 function gameReset() {
-    // write the score to the div finalScore
-    // show a button to restart the game
+    let audio = new Audio("assets/sounds/gameOver.mp3")
+    audio.play()
     gameOver = true
+    // make all cells inactive
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].classList.remove("active")
+        cells[i].classList.add("inactive")
+    }
     showRestartButton()
 }
 
@@ -127,10 +133,9 @@ function showRestartButton() {
     let restartButton = document.getElementById("restart")
     restartButton.style.display = "flex"
     restartButton.addEventListener("click", function () {
-        reaload()
+        reload()
     })
-
-    function reaload() {
+    function reload() {
         location.reload()
     }
 }

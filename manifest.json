@@ -1,0 +1,25 @@
+{
+"name": "Faster Than Green",
+"short_name": "Faster Than Green",
+"start_url": "https://tapGame.jaiki.rocks",
+"display": "fullscreen",
+"description": "Tap the green square to increase you score. Don't tap the red square they will decrease it. You have 20 seconds to get the highest score possible.",
+"lang": "English",
+"dir": "auto",
+"theme_color": "#40ae87",
+"background_color": "#f0f0f0",
+"orientation": "any",
+"icons": [
+    {
+        "src": "assets/favicon/button-finger.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "assets/favicon/android-icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+    }
+]}

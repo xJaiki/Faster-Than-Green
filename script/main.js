@@ -18,7 +18,7 @@ function game() {
 // ANCHOR: TAP LOGIC
 let scoreCount = 0;
 
-document.addEventListener("mousedown", function (event) {
+document.addEventListener("touchstart", function (event) {
     if (!gameOver) {
         if (event.target.classList.contains("active")) {
             scoreCount++

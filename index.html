@@ -7,23 +7,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tapGame</title>
     <link rel="stylesheet" href="style/global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 </head>
 
 <body>
+    <div class="titleContainer">
+        <h1 class="title">Faster than <span class="greenTitle">green</span></h1>
+        <h2 clasS="subtitle">Tap the <span class="greenTitle">green</span> squares as fast as you can!</h2>
+        <h2 class="subtitle">Don't tap the <span class="redTitle">red</span> squares.</h2>
+        <h2 class="subtitle">You have <span class="greenTitle">20</span> seconds.</h2>
+        <h2 class="subtitle">Press a square to <span class="greenTitle">start</span>.</h2>
+        
+    </div>
     <div class="container">
-        <div class="row">
-            <div>timer: </div>
-            <div id="timer">20</div>
+        <div class="gameContainer">
+            <div class="infoRow">
+                <div class="infoContainer">
+                    <div class="label">Time left</div>
+                    <div class="value" id="timer">20</div>
+                </div>
+                <div class="infoContainer">
+                    <div class="label">Score</div>
+                    <div class="value" id="score">0</div>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div>timer: </div>
+                <div id="timer">20</div>
+            </div>
+            <div class="row">
+                <div>score: </div>
+                <div id="score">0</div>
+            </div> -->
+            <!-- <div id="finalScore">final score</div> -->
+            <div id="gameContainer" class="gameContainer">
+            </div>
+            <div class="infoRow">
+                <div class="restart infoContainer" id="restart">
+                    <div class="label">Restart</div>
+                </div>
+            </div>
+            
         </div>
-        <div class="row">
-            <div>score: </div>
-            <div id="score">0</div>
-        </div>
-        <!-- <div id="finalScore">final score</div> -->
-        <div id="gameContainer" class="gameContainer">
-
-        </div>
-        <div id="restart" class="restart">restart</div>
     </div>
 </body>
 <script src="script/main.js"></script>

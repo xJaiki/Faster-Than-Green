@@ -1,23 +1,69 @@
 body {
     background-color: #ffffff;
     color: #000000;
-    font-family: "Arial", sans-serif;
-    font-size: 12px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    margin-top: 2rem;
+    padding: 0;
+}
+.titleContainer {
+    
+}
+.title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.greenTitle {
+    color: #40ae87;
+}
+.redTitle {
+    color: #e74c3c;
+}
+.subtitle {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-align: center;
     margin: 0;
     padding: 0;
 }
 .container {
     height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
-.row {
+.gameContainer {
+    background-color: #f0f0f0;
+    padding: 0.5rem;
+    border-radius: 20px;
+}
+.infoRow {
     display: flex;
+    width: 100%;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-block: 10px;
+}
+.infoContainer {
+    display: flex;
+    background-color: #ffffff;
+    height: 50px;
+    border-radius: 10px ;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
 }
 .gameCol {
     display: flex;
@@ -29,23 +75,18 @@ body {
 }
 .gameCell {
     background-color: tomato;
-    width: 50px;
-    height: 50px;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 20%;
-    margin: 10px;
+    margin: 0.5rem;
 }
 .active {
-    background-color: green;
+    background-color: #40ae87;
 } 
 .inactive {
-    background-color: red;
+    background-color: #ee6666;
 }
 .restart {
     display: none;
-    background-color: blue;
-    color: white;
-    font-size: 20px;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 10px;
+    background-color: #ee6666 !important;
 }

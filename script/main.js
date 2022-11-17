@@ -104,7 +104,7 @@ col.addEventListener("click", function (event) {
     }
 })
 function startTimer() {
-    let time = 20
+    let time = 2
     let timer = setInterval(function () {
         time--
         document.getElementById("timer").innerHTML = time
@@ -125,7 +125,7 @@ function gameReset() {
 
 function showRestartButton() {
     let restartButton = document.getElementById("restart")
-    restartButton.style.display = "block"
+    restartButton.style.display = "flex"
     restartButton.addEventListener("click", function () {
         reaload()
     })

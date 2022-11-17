@@ -14,8 +14,6 @@ function game() {
     document.getElementById("gameContainer").appendChild(col)
 }
 
-// debug
-document.getElementById("lmao").innerHTML = document.getElementsByClassName("active").length
 
 // ANCHOR: TAP LOGIC
 let scoreCount = 0;

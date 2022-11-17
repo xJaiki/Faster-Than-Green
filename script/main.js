@@ -1,3 +1,12 @@
+// check if device is touch 
+let input 
+if ("ontouchstart" in document.documentElement) {
+    input = "touchstart"
+} else {
+    input = "mousedown"
+}
+
+
 // ANCHOR: VARIOUS VARIABLES
 let col = document.createElement("div")
 col.classList.add("gameCol")
@@ -10,7 +19,6 @@ game()
 // ANCHOR: GAME SEQUENCE
 function game() {
     createGrid(5)
-    
     document.getElementById("gameContainer").appendChild(col)
 }
 
@@ -18,7 +26,8 @@ function game() {
 // ANCHOR: TAP LOGIC
 let scoreCount = 0;
 
-document.addEventListener("mousedown", function (event) {
+
+document.addEventListener(input, function (event) {
     if (!gameOver) {
         if (event.target.classList.contains("active")) {
             scoreCount++
@@ -89,7 +98,6 @@ function changeCellStatus(event) {
         }
         cells[random].classList.remove("inactive")
         cells[random].classList.add("active")
-
     }
 }
 
@@ -97,7 +105,7 @@ function changeCellStatus(event) {
 
 // ANCHOR: TIMER LOGIC AND CONDITION
 let firstClick = true
-col.addEventListener("click", function (event) {
+col.addEventListener(input, function (event) {
     if (firstClick) {
         firstClick = false
         randomizeCells(cells, 10)
@@ -139,8 +147,6 @@ function showRestartButton() {
         location.reload()
     }
 }
-
-
 
 // ANCHOR: SECRET GREEN DEBUG BUTTON 
 let debugButton = document.getElementById("debug")

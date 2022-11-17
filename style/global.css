@@ -10,7 +10,7 @@ body {
     
 }
 .title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
@@ -23,13 +23,21 @@ body {
     color: #e74c3c;
 }
 .subtitle {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
     padding: 0;
 }
-.container {
+@media only screen and (min-width: 600px) {
+    .title {
+        font-size: 4rem;
+    }
+    .subtitle {
+        font-size: 2rem;
+    }
+}
+.speedContainer {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -67,17 +75,18 @@ body {
 .gameCol {
     display: flex;
     flex-direction: column;
+    gap: 0.4rem;
 }
 .gameRow {
     display: flex;
     flex-direction: row;
+    gap: 0.4rem;
 }
 .gameCell {
     background-color: tomato;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 20%;
-    margin: 0.5rem;
 }
 .active {
     background-color: #40ae87;

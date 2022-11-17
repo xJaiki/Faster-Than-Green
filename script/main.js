@@ -1,67 +1,85 @@
+// ANCHOR: VARIOUS VARIABLES
 let col = document.createElement("div")
 col.classList.add("gameCol")
+let cells = col.getElementsByClassName("gameCell")
+let gameOver = false
 
-for (let i = 0; i < 5; i++) {
-    let row = document.createElement("div")
-    row.classList.add("gameRow")
-    for (let j = 0; j < 5; j++) {
-        // randomize cell status, 1 = active, 0 = inactive, the number of active cells is 10
-        while
+game()
 
-        
-        /*
-        let random = Math.floor(Math.random() * 2)
-        let cell = document.createElement("div")
-        cell.classList.add("gameCell")
-        if (random == 1) {
-            cell.classList.add("active")
-            cell.classList.remove("inactive")
-        } else {
-            cell.classList.add("inactive")
-            cell.classList.remove("active")
-        }
-        row.appendChild(cell)
-        */
-    }
-    col.appendChild(row)
+
+// ANCHOR: GAME SEQUENCE
+function game() {
+    createGrid(5)
+    randomizeCells(cells, 10)
+    document.getElementById("gameContainer").appendChild(col)
 }
-document.getElementById("gameContainer").appendChild(col)
 
-document.getElementById("lmao").innerHTML = "0"
+// debug
+document.getElementById("lmao").innerHTML = document.getElementsByClassName("active").length
 
+// ANCHOR: TAP LOGIC
+let scoreCount = 0;
 
-// change from click to first touch
-// addvenetlistener type click and touchstart
-addEventListener("mousedown", function (event) {
-    changeCellStatus(event)
-    // if all cells are inactive or active, you win
-    let cells = document.getElementsByClassName("gameCell")
-    let active = 0
-    let inactive = 0
-    for (let i = 0; i < cells.length; i++) {
-        if (cells[i].classList.contains("active")) {
-            active++
-        } else {
-            inactive++
+document.addEventListener("mousedown", function (event) {
+    if (!gameOver) {
+        if (event.target.classList.contains("active")) {
+            scoreCount++
+            // reproduce the sound of a tap
+            let audio = new Audio("/assets/sounds/active.mp3")
+            audio.play()
+            navigator.vibrate(30)
+        } else if (event.target.classList.contains("inactive")) {
+            scoreCount-=2
+            navigator.vibrate(250)
         }
+        // scoreCount always positive 
+        if (scoreCount < 0) {
+            scoreCount = 0
+        }
+        document.getElementById("score").innerHTML = scoreCount
+        changeCellStatus(event)
     }
-
-    let random = Math.floor(Math.random() * cells.length)
-
-    /*
-    if (active == cells.length || inactive == cells.length) {
-        resetGame(cells)
-    }
-    */
-
-    // write in the div with the id "lmao" the number of active cells
-    document.getElementById("lmao").innerHTML = active
-
 })
 
+// ANCHOR: GRID CREATION
+function createGrid(size) {
+    for (let i = 0; i < size; i++) {
+        let row = document.createElement("div")
+        row.classList.add("gameRow")
+        for (let j = 0; j < size; j++) {
+            let cell = document.createElement("div")
+            cell.classList.add("gameCell")
+            cell.classList.add("inactive")
+            row.appendChild(cell)
+        }
+        col.appendChild(row)
+    }
+}
+
+// ANCHOR: STATUS RANDOMIZATION 
+function randomizeCells(cells, num) {
+    let activeCells = 0
+    for (let i = 0; i < cells.length; i++) {
+        let random = Math.floor(Math.random() * 2)
+        if (random == 1) {
+            cells[i].classList.add("active")
+            cells[i].classList.remove("inactive")
+            activeCells++
+        } else {
+            cells[i].classList.remove("active")
+            cells[i].classList.add("inactive")
+        }
+        if (activeCells > num) {
+            cells[i].classList.remove("active")
+            cells[i].classList.add("inactive")
+            activeCells--
+        }
+    }
+}
+
+// ANCHOR: CELL STATUS CHANGE
 function changeCellStatus(event) {
-    // when i click on an active cell, activate another random inactive cell
-    if(event.target.classList.contains("active")) {
+    if (event.target.classList.contains("active")) {
         event.target.classList.remove("active")
         event.target.classList.add("inactive")
         let cells = document.getElementsByClassName("gameCell")
@@ -75,16 +93,47 @@ function changeCellStatus(event) {
     }
 }
 
-function resetGame(cells) {
-    for (let i = 0; i < cells.length; i++) {
-        let random = Math.floor(Math.random() * 2)
-        if (random == 1) {
-            cells[i].classList.add("active")
-            cells[i].classList.remove("inactive")
-        } else {
-            cells[i].classList.add("inactive")
-            cells[i].classList.remove("active")
+// count the number of active cells clicked 
+
+// ANCHOR: TIMER LOGIC AND CONDITION
+let firstClick = true
+col.addEventListener("click", function (event) {
+    if (firstClick) {
+        firstClick = false
+        startTimer()
+    }
+})
+function startTimer() {
+    let time = 20
+    let timer = setInterval(function () {
+        time--
+        document.getElementById("timer").innerHTML = time
+        if (time == 0) {
+            clearInterval(timer)
+            gameReset()
         }
+    }, 1000)
+}
+
+// ANCHOR: GAME RESET
+function gameReset() {
+    // write the score to the div finalScore
+    // show a button to restart the game
+    let finalScore = document.getElementById("finalScore")
+    finalScore.innerHTML = scoreCount
+    gameOver = true
+    showRestartButton()
+}
+
+function showRestartButton() {
+    let restartButton = document.getElementById("restart")
+    restartButton.style.display = "block"
+    restartButton.addEventListener("click", function () {
+        reaload()
+    })
+
+    function reaload() {
+        location.reload()
     }
 }
 

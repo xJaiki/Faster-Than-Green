@@ -7,7 +7,17 @@ body {
     padding: 0;
 }
 .container {
-    
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 .gameCol {
     display: flex;
@@ -29,4 +39,13 @@ body {
 } 
 .inactive {
     background-color: red;
+}
+.restart {
+    display: none;
+    background-color: blue;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
 }

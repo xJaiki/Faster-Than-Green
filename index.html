@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,24 @@
     <title>tapGame</title>
     <link rel="stylesheet" href="style/global.css">
 </head>
+
 <body>
     <div class="container">
-        <div id="gameContainer" class="gameContainer">
-            
+        <div class="row">
+            <div>timer: </div>
+            <div id="timer">10</div>
         </div>
-        <div id="lmao"></div>
+        <div class="row">
+            <div>score: </div>
+            <div id="score">0</div>
+        </div>
+        <!-- <div id="finalScore">final score</div> -->
+        <div id="gameContainer" class="gameContainer">
+
+        </div>
+        <div id="restart" class="restart">restart</div>
     </div>
 </body>
 <script src="script/main.js"></script>
+
 </html>

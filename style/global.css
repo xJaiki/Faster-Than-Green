@@ -3,7 +3,6 @@ body {
     color: #000000;
     font-family: "Roboto", sans-serif;
     font-weight: 800;
-    font-size: 1rem;
     margin-top: 2rem;
     padding: 0;
 }
@@ -91,4 +90,35 @@ body {
 .restart {
     display: none;
     background-color: #ee6666 !important;
+}
+
+
+
+.debugContainer {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #f0f0f0;
+    margin: 1rem;
+    padding-block: 1rem;
+    border-radius: 10px;
+}
+.debugTitle {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.debugMessage {
+    font-size: 1rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }

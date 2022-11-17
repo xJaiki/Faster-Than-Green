@@ -140,3 +140,29 @@ function showRestartButton() {
     }
 }
 
+
+
+// ANCHOR: SECRET GREEN DEBUG BUTTON 
+let debugButton = document.getElementById("debug")
+let debugCount = 0;
+debugButton.addEventListener("click", function () {
+    debugCount++
+    if(debugCount == 5) {
+        showDebugMessage()
+        showDebugMenu()
+    }
+})
+
+function showDebugMessage() {
+    
+}
+
+function showDebugMessage() {
+    let audio = new Audio("assets/sounds/debug.mp3")
+    audio.play()
+    let debug = document.getElementById("debugContainer")
+    debug.style.display = "flex"
+    debug.addEventListener("click", function () {
+        debug.style.display = "none"
+    })
+}

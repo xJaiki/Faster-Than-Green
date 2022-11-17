@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tapGame</title>
     <link rel="stylesheet" href="style/global.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
 </head>
 
 <body>
@@ -17,12 +16,11 @@
         <h2 class="subtitle">Don't tap the <span class="redTitle">red</span> squares.</h2>
         <h2 class="subtitle">You have <span class="greenTitle">20</span> seconds.</h2>
         <h2 class="subtitle">Press a square to <span class="greenTitle">start</span>.</h2>
-        
     </div>
     <div class="container">
         <div class="gameContainer">
             <div class="infoRow">
-                <div class="infoContainer">
+                <div id="debug" class="infoContainer">
                     <div class="label">Time left</div>
                     <div class="value" id="timer">20</div>
                 </div>
@@ -47,7 +45,15 @@
                     <div class="label">Restart</div>
                 </div>
             </div>
-            
+        </div>
+    </div>
+    <div id="debugContainer" class="debugContainer">
+        <div class="debugTitle">
+            Debug
+        </div>
+        <div class="debugMessage">
+            Debug activated 🤠!
+            To remove debug, reload the page.
         </div>
     </div>
 </body>

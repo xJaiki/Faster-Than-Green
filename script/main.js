@@ -6,7 +6,6 @@ if ("ontouchstart" in document.documentElement) {
     input = "mousedown"
 }
 
-
 // ANCHOR: VARIOUS VARIABLES
 let col = document.createElement("div")
 col.classList.add("gameCol")
@@ -20,9 +19,33 @@ if(localStorage.getItem("highScore") == null) {
 } else {
     highScore.innerHTML = localStorage.getItem("highScore")
 }
+/*
+let speedMode = document.getElementById("speedMode")
+let speedDesc = document.getElementById("speedDesc")
+let survivalMode = document.getElementById("survivalMode")
+let surivavlDesc = document.getElementById("survivalDesc")
 
-console.log(localStorage)
+// ANCHOR: GAME MODE SELECTION 
+let speed = document.getElementById("speed")
+let survival = document.getElementById("survival")
+let battleRoyale = document.getElementById("battleRoyale")
+let selectedMode = ""
+let menu = document.getElementById("menuContainer")
+document.addEventListener(input, function (event) {
+    if (event.target == speed) {
+        menu.style.display = "none"
+        speedMode.style.display = "flex"
+        speedDesc.style.display = "flex"
+    } else if (event.target == survival) {
+        menu.style.display = "none"
+        survivalMode.style.display = "flex"
+        surivavlDesc.style.display = "flex"
 
+    } else if (event.target == battleRoyale) {
+        selectedMode = "battleRoyale"
+    }
+})
+*/
 
 
 game()

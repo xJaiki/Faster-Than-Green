@@ -6,8 +6,35 @@ body {
     margin-top: 2rem;
     padding: 0;
 }
+.menuContainer {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.menuLabel {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background-color: #f0f0f0 !important;
+    margin-bottom: 2rem !important;
+}
+.menu {
+    width: 50%;
+}
+.menuButtons {
+    background-color:#40ae87 !important; 
+}
 .titleContainer {
-    
+
+}
+.speedSubtitleContainer {
+    display: flex;
+    flex-direction: column;
 }
 .title {
     font-size: 2.5rem;

@@ -15,7 +15,11 @@ let gameOver = false
 let score = document.getElementById("score")
 let highScore = document.getElementById("highScore")
 highScore.innerHTML = localStorage.getItem("highScore")
-localStorage.setItem("highScore", 0)
+if(localStorage.getItem("highScore") == null) {
+    localStorage.setItem("highScore", 0)
+} else {
+    highScore.innerHTML = localStorage.getItem("highScore")
+}
 
 console.log(localStorage)
 

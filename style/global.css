@@ -125,10 +125,128 @@ body {
 }
 .restart {
     display: none;
-    background-color: #ee6666 !important;
+    background-color: #40ae87 !important;
+}
+.scoreboardButton {
+    display: flex;
 }
 
 
+
+.scoreboardContainer {
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+}
+.backButton {
+    background-color: #40ae87 !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    background-color: #40ae87;
+    padding: 1rem;
+    border-radius: 15px;
+}
+.scoreboard {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 20px;
+}
+.scoreboardTitle {
+    font-size: 2rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.scoreboardRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+.scoreboardInputContainer {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    backdrop-filter: brightness(0.5);
+}
+.scoreboardInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 20px;
+}
+.scoreboardInputTitle {
+    font-size: 2rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.scoreboardInputRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0.5rem 0;
+    gap: 0.5rem;
+}
+.scoreboardInputLabel {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.scoreboardInputField {
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 10px;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-align: center;
+    margin-block: 0.5rem;
+    padding: 0;
+}
+.scoreboardSubmit {
+    background-color: #40ae87 !important;
+    padding: 0.5rem;
+    border-radius: 15px;
+}
+.scoreboardLabel {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
 
 .debugContainer {
     display: none;

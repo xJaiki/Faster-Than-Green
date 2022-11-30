@@ -143,10 +143,11 @@ col.addEventListener(input, function (event) {
         firstClick = false
         randomizeCells(cells, 10)
         startTimer()
+        hideScoreboardButton()
     }
 })
 function startTimer() {
-    let time = 20
+    let time = 2
     let timer = setInterval(function () {
         time--
         document.getElementById("timer").innerHTML = time
@@ -156,6 +157,38 @@ function startTimer() {
         }
     }, 1000)
 }
+function hideScoreboardButton() {
+    let scoreboardButton = document.querySelector(".scoreboardButton")
+    scoreboardButton.style.display = "none"
+}
+
+// ANCHOR: SCOREBOARD
+let scoreboard = document.querySelector(".scoreboardButton")
+let scoreboardContainer = document.querySelector(".scoreboardContainer")
+let scoreboardBack = document.querySelector(".backButton") 
+scoreboard.addEventListener(input, function (event) {
+    scoreboardContainer.style.display = "flex"
+    scoreboard.style.display = "none"
+})  
+scoreboardBack.addEventListener(input, function () {
+    scoreboardContainer.style.display = "none"
+    scoreboard.style.display = "flex"
+})
+
+// ANCHOR: SCOREBOARD SUBMIT 
+let scoreboardSubmit = document.querySelector(".scoreboardSubmit")
+let scoreboardInputContainer = document.querySelector(".scoreboardInputContainer")
+scoreboardSubmit.addEventListener(input, function (event) {
+    scoreboardInputContainer.style.display = "none"
+})
+// when i push enter in scoreboardInputField it should close the input container
+let scoreboardInputField = document.querySelector(".scoreboardInputField")
+scoreboardInputField.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault()
+        scoreboardSubmit.click()
+    }
+})
 
 // ANCHOR: GAME RESET
 function gameReset() {
@@ -168,6 +201,8 @@ function gameReset() {
         cells[i].classList.add("inactive")
     }
     showRestartButton()
+    showScoreboardButton()
+    showScoreboardSubmit()
     // save high score
     if (score.innerHTML > localStorage.getItem("highScore")) {
         localStorage.setItem("highScore", score.innerHTML)
@@ -176,7 +211,14 @@ function gameReset() {
         highScore.innerHTML = localStorage.getItem("highScore")
     }
 }
-
+function showScoreboardSubmit() {
+    let submit = document.querySelector(".scoreboardInputContainer")
+    submit.style.display = "flex"
+}
+function showScoreboardButton() {
+    let scoreboardButton = document.querySelector(".scoreboardButton")
+    scoreboardButton.style.display = "flex"
+}
 function showRestartButton() {
     let restartButton = document.getElementById("restart")
     restartButton.style.display = "flex"
@@ -198,10 +240,6 @@ debugButton.addEventListener("click", function () {
         showDebugMenu()
     }
 })
-
-function showDebugMessage() {
-    
-}
 
 function showDebugMessage() {
     let audio = new Audio("assets/sounds/debug.mp3")

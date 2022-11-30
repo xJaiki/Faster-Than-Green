@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>FASTER THAN GREEN</title>
     <link rel="stylesheet" href="style/global.css">
 
@@ -29,37 +29,10 @@
 </head>
 
 <body>
+    
     <div class="titleContainer">
         <h1 class="title">Faster than <span class="greenTitle">green</span></h1>
     </div>
-    <!--
-    <div id="menuContainer" class="menuContainer">
-        <div class="menu">
-            <div class="infoRow">
-                <div class="menuLabel infoContainer">
-                    <div class="label">Choose your gamemode</div>
-                </div>
-            </div>
-            <div class="infoRow">
-                <div id="speed" class="menuButtons infoContainer">
-                    <div class="label">Speed</div>
-                </div>
-                <div id="survival" class="menuButtons infoContainer">
-                    <div class="label">Survival</div>
-                </div>
-                <div id="battleRoyale" class="menuButtons infoContainer">
-                    <div class="label">Battle Royale</div>
-                </div>
-            </div>
-            <div class="infoRow">
-                <div class="menuButtons infoContainer">
-                    <div class="label">Credits</div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
 
     <div id="speedDesc" class="speedSubtitleContainer">
         <h2 clasS="subtitle">Tap only the <span class="greenTitle">green</span>.</h2>
@@ -89,50 +62,43 @@
                     <div class="label">Restart</div>
                 </div>
             </div>
+            <div class="infoRow">
+                <div class="scoreboardButton infoContainer menuButtons">
+                    <div class="label">Scoreboard</div>
+                </div>
+            </div>
         </div>
     </div>
 
-
-    <!-- <div id="survivalDesc" class="speedSubtitleContainer">
-        <h2 clasS="subtitle">Tap only the <span class="greenTitle">green</span>.</h2>
-        <h2 class="subtitle">Don't tap the <span class="redTitle">red</span>.</h2>
-        <h2 class="subtitle">You have <span class="greenTitle">20</span> seconds.</h2>
-    </div>
-    <div id="survivalMode" class="speedContainer">
-        <div class="gameContainer">
-            <div class="infoRow">
-                <div id="debug" class="infoContainer">
-                    <div class="label">Time left</div>
-                    <div class="value" id="timer">20</div>
-                </div>
-                <div class="infoContainer">
-                    <div class="label">Score</div>
-                    <div class="value" id="score">0</div>
-                </div>
-                <div class="infoContainer">
-                    <div class="label">High</div>
-                    <div class="value" id="highScore">0</div>
-                </div>
-            </div>
-            <div id="survivalGameContainer" class="gameContainer">
-            </div>
-            <div class="infoRow">
-                <div class="restart infoContainer" id="restart">
-                    <div class="label">Restart</div>
-                </div>
+    <div class="scoreboardContainer">
+        <div class="backButton menuButtons">
+            <div class="label">Back</div>
+        </div>
+        <div class="scoreboard">
+            <div class="scoreboardTitle">Scoreboard</div>
+            <div class="scoreboardRow">
+                <div class="scoreboardLabel">Name</div>
+                <div class="scoreboardLabel">Score</div>
             </div>
         </div>
-    </div> -->
+    </div>
 
-
-
+    <div class="scoreboardInputContainer">
+        <div class="scoreboardInput">
+            <div class="scoreboardInputTitle">Game over!</div>
+            <input class="scoreboardInputField" type="text" id="nameInput">
+            <div class="scoreboardSubmit"> 
+                <div class="scoreboardLabel">Submit</div>
+            </div>
+        </div>
+    </div>
 
     <div id="debugContainer" class="debugContainer">
         <div class="debugTitle">
             Debug
         </div>
         <div class="debugMessage">
-            Debug activated 🤠!
+            Debug activated, yeehaw 🤠!
             To remove debug, reload the page.
         </div>
     </div>

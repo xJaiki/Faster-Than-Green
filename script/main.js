@@ -35,11 +35,11 @@ const analytics = getAnalytics(app);
 const db = getDatabase();
 const reference = ref(db, 'scoreboard');
 
-function writeUserData(name, score) {
+function writeUserData(name, score, input) {
     // add a new post to the database with a generated id
     console.log("writing")
     if (name != "" && score != "") {
-        setScore(name, score);
+        setScore(name, score, input);
     }
 
     let scores = []
@@ -52,17 +52,18 @@ function writeUserData(name, score) {
     for (let i = 0; i < scores.length; i++) {
         if (scores[i].name == name) {
             if (scores[i].score < score) {
-                setScore(name, score);
+                setScore(name, score, input);
             }
         }
     }
     console.log("data written")
 }
 
-function setScore(name, score) {
+function setScore(name, score, input) {
     set(ref(db, 'scoreboard/' + name), {
         name: name,
-        score: score
+        score: score,
+        input: input
     });
 }
 
@@ -208,7 +209,7 @@ col.addEventListener(input, function (event) {
     }
 })
 function startTimer() {
-    let time = 20
+    let time = 1
     let timer = setInterval(function () {
         time--
         document.getElementById("timer").innerHTML = time
@@ -236,30 +237,40 @@ scoreboardButton.addEventListener(input, function (event) {
         const data = snapshot.val()
         for (const key in data) {
             scores.push(data[key])
-            console.log(key)
         }
+        // sort the array in descending order by scores
+        scores.sort(function (a, b) {
+            return b.score - a.score
+        })
+
         let scoreboard = document.querySelector(".scoreboard")
         for (let i = 0; i < scores.length; i++) {
-            let scoreboardRow = document.createElement("div")
-            let name = scores[i].name
-            let score = scores[i].score
-            scoreboardRow.classList.add("scoreboardRow")
-            // name and score as two separate divs
-            let nameDiv = document.createElement("div")
-            let scoreDiv = document.createElement("div")
-            nameDiv.classList.add("nameDiv")
-            scoreDiv.classList.add("scoreDiv")
-            nameDiv.innerHTML = name
-            scoreDiv.innerHTML = score
-            scoreboardRow.appendChild(nameDiv)
-            scoreboardRow.appendChild(scoreDiv)
-            scoreboard.appendChild(scoreboardRow)
+            // print only the top 10 scores
+            if (i < 10) {
+                let scoreboardRow = document.createElement("div")
+                let scoreboardList = document.querySelector(".scoreboardList")
+                let username = scores[i].name
+                let score = scores[i].score
+                if (scores[i].input == "mousedown") {
+                    username = "💻" + username
+                } else if (scores[i].input == "touchstart") {
+                    username = "📱" + username
+                }
+                scoreboardRow.classList.add("scoreboardRow")
+                // name and score as two separate divs
+                let nameDiv = document.createElement("div")
+                let scoreDiv = document.createElement("div")
+                nameDiv.classList.add("nameDiv")
+                scoreDiv.classList.add("scoreDiv")
+                nameDiv.innerHTML = username
+                scoreDiv.innerHTML = score
+                scoreboardRow.appendChild(nameDiv)
+                scoreboardRow.appendChild(scoreDiv)
+                scoreboardList.appendChild(scoreboardRow)
+            }
         }
         scoreboardContainer.style.display = "flex"
     });
-
-    // add the scores to the scoreboard 
-
 })
 scoreboardBack.addEventListener(input, function () {
     scoreboardContainer.style.display = "none"
@@ -287,12 +298,8 @@ scoreboardInputField.addEventListener("keyup", function (event) {
 
 
 function cleanScoreboard() {
-    let scoreboard = document.querySelector(".scoreboard");
-    let scoreboardRows = document.querySelectorAll(".scoreboardRow");
-    for (let i = 0; i < scoreboardRows.length; i++) {
-        scoreboard.removeChild(scoreboardRows[i])
-    }
-
+    let scoreboardList = document.querySelector(".scoreboardList")
+    scoreboardList.innerHTML = ""
 }
 
 // ANCHOR: GAME RESET
@@ -327,9 +334,9 @@ let submitButton = document.querySelector(".scoreboardSubmit")
 let scoreboardInputContainer = document.querySelector(".scoreboardInputContainer")
 
 submitButton.addEventListener(input, async function (event) {
-    let input = document.querySelector(".scoreboardInputField")
+    let scoreboardInput = document.querySelector(".scoreboardInputField")
     console.log("submit button clicked")
-    let name = input.value
+    let name = scoreboardInput.value
     let score = document.querySelector("#score").innerHTML
     let highScoreLocalStorage = localStorage.getItem("highScore")
 
@@ -349,13 +356,13 @@ submitButton.addEventListener(input, async function (event) {
             }
         }
         if (badWord) {
-            input.value = ""
-            input.placeholder = "🤨"
+            scoreboardInput.value = ""
+            scoreboardInput.placeholder = "🤨"
         }
     })
-
+    // check if th e
     if (name != "" && badWord == false) {
-        writeUserData(name, score)
+        writeUserData(name, score, input)
         if (score > highScoreLocalStorage) {
             console.log("score is greater than highscore")
             localStorage.setItem("highScore", score)

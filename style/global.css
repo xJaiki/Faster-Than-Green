@@ -261,6 +261,15 @@ body {
     padding: 0.5rem;
     border-radius: 15px;
 }
+.scoreboardList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0.5rem 0;
+    gap: 0.5rem;
+}
 
 .fadeIn {
     animation: fadeIn ease 750ms;

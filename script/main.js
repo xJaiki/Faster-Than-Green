@@ -206,8 +206,63 @@ col.addEventListener(input, function (event) {
         randomizeCells(cells, 10)
         startTimer()
         hideScoreboardButton()
+        
+        setInterval(function () {
+            goldSpawner();
+        }, 1000)
+
+        setInterval(function () {
+            graySpawner();
+        }, 1000)
     }
 })
+
+/**
+ * If the score is greater than or equal to 100, a random cell is selected and if it is active, it is
+ * changed to gray. If the gray cell is clicked, the score is decreased by 5 and the cell is changed
+ * back to inactive.
+ */
+function graySpawner() {
+    let random = Math.floor(Math.random() * cells.length);
+    if (scoreCount >= 100) {
+        if (cells[random].classList.contains("active")) {
+            cells[random].classList.add("gray");
+        }
+        // if the cell is clicked, the score is decreased by 5 and the cell is changed back to inactive
+        cells[random].addEventListener(input, function (event) {
+            if (event.target.classList.contains("gray")) {
+                scoreCount -= 5;
+                event.target.classList.remove("gray");
+                event.target.classList.add("inactive");
+                // play sound
+                let audio = new Audio("assets/sounds/gray.mp3");
+                audio.play();
+            }
+        });
+    }
+}
+
+/**
+ * If the cell is clicked, the score is increased by 5 and the cell is changed back to inactive.
+ */
+function goldSpawner() {
+    let random = Math.floor(Math.random() * cells.length);
+    if (cells[random].classList.contains("active")) {
+        cells[random].classList.add("gold");
+    }
+    // if the cell is clicked, the score is increased by 5 and the cell is changed back to inactive
+    cells[random].addEventListener(input, function (event) {
+        if (event.target.classList.contains("gold")) {
+            scoreCount += 5;
+            event.target.classList.remove("gold");
+            event.target.classList.add("inactive");
+            // play sound
+            let audio = new Audio("assets/sounds/gold.mp3");
+            audio.play();
+        }
+    });
+}
+
 function startTimer() {
     let time = 20
     let timer = setInterval(function () {
@@ -217,6 +272,7 @@ function startTimer() {
             clearInterval(timer)
             gameReset()
         }
+        console.log(time)
     }, 1000)
 }
 function hideScoreboardButton() {
@@ -310,6 +366,8 @@ function gameReset() {
     // make all cells inactive
     for (let i = 0; i < cells.length; i++) {
         cells[i].classList.remove("active")
+        cells[i].classList.remove("gold")
+        cells[i].classList.remove("gray")
         cells[i].classList.add("inactive")
     }
     showRestartButton()

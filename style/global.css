@@ -3,7 +3,7 @@ body {
     color: #000000;
     font-family: "Roboto", sans-serif;
     font-weight: 800;
-    margin-top: 2rem;
+    margin-top: 0.2rem;
     padding: 0;
 }
 .menuContainer {
@@ -49,6 +49,12 @@ body {
 .redTitle {
     color: #e74c3c;
 }
+.goldTitle {
+    color: #f1c40f;
+}
+.grayTitle {
+    color: #7f8c8d;
+}
 .subtitle {
     font-size: 1rem;
     font-weight: 900;
@@ -61,7 +67,7 @@ body {
         font-size: 4rem;
     }
     .subtitle {
-        font-size: 2rem;
+        font-size: 1.4rem;
     }
 }
 .speedContainer {
@@ -111,8 +117,8 @@ body {
 }
 .gameCell {
     background-color: tomato;
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 20%;
 }
 .active {
@@ -121,6 +127,14 @@ body {
 } 
 .inactive {
     background-color: #ee6666;
+    transition: 0.1s;
+}
+.gold {
+    background-color: #f1c40f;
+    transition: 0.1s;
+}
+.gray {
+    background-color: #7f8c8d;
     transition: 0.1s;
 }
 .restart {

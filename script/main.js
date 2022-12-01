@@ -1,9 +1,69 @@
+
 // check if device is touch 
-let input 
+let input
 if ("ontouchstart" in document.documentElement) {
     input = "touchstart"
 } else {
     input = "mousedown"
+}
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
+import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyDGZSaU4lin4a6NvAGtvjVj2oo93tHYHVk",
+    authDomain: "faster-than-green.firebaseapp.com",
+    databaseURL: "https://faster-than-green-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "faster-than-green",
+    storageBucket: "faster-than-green.appspot.com",
+    messagingSenderId: "1097054825356",
+    appId: "1:1097054825356:web:3e0a9abc93d28e761044a9",
+    measurementId: "G-JFYXT2D36Y"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getDatabase();
+const reference = ref(db, 'scoreboard');
+
+function writeUserData(name, score) {
+    // add a new post to the database with a generated id
+    console.log("writing")
+    if (name != "" && score != "") {
+        setScore(name, score);
+    }
+
+    let scores = []
+    onValue(reference, (snapshot) => {
+        const data = snapshot.val()
+        for (const key in data) {
+            scores.push(data[key])
+        }
+    });
+    for (let i = 0; i < scores.length; i++) {
+        if (scores[i].name == name) {
+            if (scores[i].score < score) {
+                setScore(name, score);
+            }
+        }
+    }
+    console.log("data written")
+}
+
+function setScore(name, score) {
+    set(ref(db, 'scoreboard/' + name), {
+        name: name,
+        score: score
+    });
 }
 
 // ANCHOR: VARIOUS VARIABLES
@@ -14,8 +74,9 @@ let gameOver = false
 let score = document.getElementById("score")
 let highScore = document.getElementById("highScore")
 highScore.innerHTML = localStorage.getItem("highScore")
-if(localStorage.getItem("highScore") == null) {
+if (localStorage.getItem("highScore") == null) {
     localStorage.setItem("highScore", 0)
+    highScore.innerHTML = 0
 } else {
     highScore.innerHTML = localStorage.getItem("highScore")
 }
@@ -69,7 +130,7 @@ col.addEventListener(input, function (event) {
             audio.play()
             navigator.vibrate(30)
         } else if (event.target.classList.contains("inactive")) {
-            scoreCount-=2
+            scoreCount -= 2
             let audio = new Audio("assets/sounds/wrong.mp3")
             audio.play()
             navigator.vibrate(250)
@@ -147,7 +208,7 @@ col.addEventListener(input, function (event) {
     }
 })
 function startTimer() {
-    let time = 2
+    let time = 20
     let timer = setInterval(function () {
         time--
         document.getElementById("timer").innerHTML = time
@@ -163,32 +224,76 @@ function hideScoreboardButton() {
 }
 
 // ANCHOR: SCOREBOARD
-let scoreboard = document.querySelector(".scoreboardButton")
+let scoreboardButton = document.querySelector(".scoreboardButton")
 let scoreboardContainer = document.querySelector(".scoreboardContainer")
-let scoreboardBack = document.querySelector(".backButton") 
-scoreboard.addEventListener(input, function (event) {
-    scoreboardContainer.style.display = "flex"
-    scoreboard.style.display = "none"
-})  
+let scoreboardBack = document.querySelector(".backButton")
+let scoreboardRow = document.querySelector(".scoreboardRow")
+scoreboardButton.addEventListener(input, function (event) {
+
+    var scores = []
+    // create an array with all the scores in the firebase database
+    onValue(reference, (snapshot) => {
+        const data = snapshot.val()
+        for (const key in data) {
+            scores.push(data[key])
+            console.log(key)
+        }
+        let scoreboard = document.querySelector(".scoreboard")
+        for (let i = 0; i < scores.length; i++) {
+            let scoreboardRow = document.createElement("div")
+            let name = scores[i].name
+            let score = scores[i].score
+            scoreboardRow.classList.add("scoreboardRow")
+            // name and score as two separate divs
+            let nameDiv = document.createElement("div")
+            let scoreDiv = document.createElement("div")
+            nameDiv.classList.add("nameDiv")
+            scoreDiv.classList.add("scoreDiv")
+            nameDiv.innerHTML = name
+            scoreDiv.innerHTML = score
+            scoreboardRow.appendChild(nameDiv)
+            scoreboardRow.appendChild(scoreDiv)
+            scoreboard.appendChild(scoreboardRow)
+        }
+        scoreboardContainer.style.display = "flex"
+    });
+
+    // add the scores to the scoreboard 
+
+})
 scoreboardBack.addEventListener(input, function () {
     scoreboardContainer.style.display = "none"
-    scoreboard.style.display = "flex"
+    scoreboardButton.style.display = "flex"
+    cleanScoreboard();
+})
+scoreboardContainer.addEventListener(input, function (event) {
+    if (event.target == scoreboardContainer) {
+        scoreboardContainer.style.display = "none"
+        scoreboardButton.style.display = "flex"
+    }
+    cleanScoreboard()
 })
 
+
 // ANCHOR: SCOREBOARD SUBMIT 
-let scoreboardSubmit = document.querySelector(".scoreboardSubmit")
-let scoreboardInputContainer = document.querySelector(".scoreboardInputContainer")
-scoreboardSubmit.addEventListener(input, function (event) {
-    scoreboardInputContainer.style.display = "none"
-})
-// when i push enter in scoreboardInputField it should close the input container
 let scoreboardInputField = document.querySelector(".scoreboardInputField")
+// submit if return on mobile keyboard is pressed
 scoreboardInputField.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
-        event.preventDefault()
-        scoreboardSubmit.click()
+        event.preventDefault();
+        submitButton.click();
     }
-})
+});
+
+
+function cleanScoreboard() {
+    let scoreboard = document.querySelector(".scoreboard");
+    let scoreboardRows = document.querySelectorAll(".scoreboardRow");
+    for (let i = 0; i < scoreboardRows.length; i++) {
+        scoreboard.removeChild(scoreboardRows[i])
+    }
+
+}
 
 // ANCHOR: GAME RESET
 function gameReset() {
@@ -203,18 +308,100 @@ function gameReset() {
     showRestartButton()
     showScoreboardButton()
     showScoreboardSubmit()
-    // save high score
-    if (score.innerHTML > localStorage.getItem("highScore")) {
-        localStorage.setItem("highScore", score.innerHTML)
-        highScore.innerHTML = localStorage.getItem("highScore")
-    } else {
-        highScore.innerHTML = localStorage.getItem("highScore")
-    }
 }
 function showScoreboardSubmit() {
     let submit = document.querySelector(".scoreboardInputContainer")
+    let input = document.querySelector(".scoreboardInputField")
+    let submitButton = document.querySelector(".scoreboardSubmit")
     submit.style.display = "flex"
+    // make the input field and submit button display flex after 1 second
+    setTimeout(function () {
+        input.style.display = "flex"
+        submitButton.style.display = "flex"
+        input.classList.add("fadeIn")
+        submitButton.classList.add("fadeIn")
+    }, 250)
+
 }
+let submitButton = document.querySelector(".scoreboardSubmit")
+let scoreboardInputContainer = document.querySelector(".scoreboardInputContainer")
+
+submitButton.addEventListener(input, async function (event) {
+    let input = document.querySelector(".scoreboardInputField")
+    console.log("submit button clicked")
+    let name = input.value
+    let score = document.querySelector("#score").innerHTML
+    let highScoreLocalStorage = localStorage.getItem("highScore")
+
+
+    /* Checking if the name is not empty. If it is not empty, it will write the user data to the
+    database. If the score is greater than the high score, it will set the high score to the score.
+    If the score is not greater than the high score, it will set the high score to the high score
+    local storage. It will then hide the scoreboard input container. */
+    let badWord = false
+    // read the file badWords.txt 
+    await fetch("assets/words/itBadWords.txt").then(response => response.text()).then(text => {
+        let badWords = text.split("\n")
+        for (let i = 0; i < badWords.length; i++) {
+            badWords[i] = badWords[i].replace("\r", "")
+            if (name.toLowerCase().includes(badWords[i])) {
+                badWord = true
+            }
+        }
+        if (badWord) {
+            input.value = ""
+            input.placeholder = "🤨"
+        }
+    })
+
+    if (name != "" && badWord == false) {
+        writeUserData(name, score)
+        if (score > highScoreLocalStorage) {
+            console.log("score is greater than highscore")
+            localStorage.setItem("highScore", score)
+            highScore.innerHTML = highScoreLocalStorage
+        } else {
+            console.log("score is not greater than highscore")
+            highScore.innerHTML = highScoreLocalStorage
+        }
+        scoreboardInputContainer.style.display = "none"
+        if (name == "amogus") {
+            amogusCells()
+        }
+    }
+})
+// 
+
+function amogusCells() {
+    // make all cells 
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].classList.remove("inactive")
+        cells[i].classList.add("active")
+    }
+    cells[0].classList.remove("active")
+    cells[0].classList.add("inactive")
+    cells[4].classList.remove("active")
+    cells[4].classList.add("inactive")
+    cells[7].classList.remove("active")
+    cells[7].classList.add("inactive")
+    cells[8].classList.remove("active")
+    cells[8].classList.add("inactive")
+    cells[9].classList.remove("active")
+    cells[9].classList.add("inactive")
+    cells[14].classList.remove("active")
+    cells[14].classList.add("inactive")
+    cells[15].classList.remove("active")
+    cells[15].classList.add("inactive")
+    cells[19].classList.remove("active")
+    cells[19].classList.add("inactive")
+    cells[20].classList.remove("active")
+    cells[20].classList.add("inactive")
+    cells[22].classList.remove("active")
+    cells[22].classList.add("inactive")
+    cells[24].classList.remove("active")
+    cells[24].classList.add("inactive")
+}
+
 function showScoreboardButton() {
     let scoreboardButton = document.querySelector(".scoreboardButton")
     scoreboardButton.style.display = "flex"
@@ -235,9 +422,9 @@ let debugButton = document.getElementById("debug")
 let debugCount = 0;
 debugButton.addEventListener("click", function () {
     debugCount++
-    if(debugCount == 5) {
+    if (debugCount == 5) {
         showDebugMessage()
-        showDebugMenu()
+        //showDebugMenu()
     }
 })
 
@@ -248,5 +435,13 @@ function showDebugMessage() {
     debug.style.display = "flex"
     debug.addEventListener("click", function () {
         debug.style.display = "none"
+    })
+}
+
+function showDebugMenu() {
+    let debugMenu = document.getElementById("debugMenu")
+    debugMenu.style.display = "flex"
+    debugMenu.addEventListener("click", function () {
+        debugMenu.style.display = "none"
     })
 }

@@ -37,7 +37,7 @@ body {
     flex-direction: column;
 }
 .title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
@@ -50,7 +50,7 @@ body {
     color: #e74c3c;
 }
 .subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 900;
     text-align: center;
     margin: 0;
@@ -111,8 +111,8 @@ body {
 }
 .gameCell {
     background-color: tomato;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 20%;
 }
 .active {
@@ -143,7 +143,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ffffff;
+    backdrop-filter: brightness(0.5);
 }
 .backButton {
     background-color: #40ae87 !important;
@@ -179,6 +179,14 @@ body {
     width: 100%;
     margin: 0.5rem 0;
 }
+.scoreboardRowTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0.5rem 0;
+}
 .scoreboardInputContainer {
     display: none;
     flex-direction: column;
@@ -200,6 +208,7 @@ body {
     background-color: #ffffff;
     padding: 2rem;
     border-radius: 20px;
+    width: 50vw;
 }
 .scoreboardInputTitle {
     font-size: 2rem;
@@ -225,20 +234,47 @@ body {
     padding: 0;
 }
 .scoreboardInputField {
+    display:none;
     background-color: #f0f0f0;
     border: none;
     border-radius: 10px;
     padding: 0.5rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 900;
     text-align: center;
-    margin-block: 0.5rem;
+    margin-block: 1.5rem;
     padding: 0;
+    width: 80%;
+    height: 2rem;
+}
+.scoreboardInputField::-webkit-input-placeholder {
+    font-size: 1rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+       
 }
 .scoreboardSubmit {
+    display:none;
     background-color: #40ae87 !important;
     padding: 0.5rem;
     border-radius: 15px;
+}
+
+.fadeIn {
+    animation: fadeIn ease 750ms;
+    -webkit-animation: fadeIn ease 750ms;
+    -moz-animation: fadeIn ease 750ms;
+    -o-animation: fadeIn ease 750ms;
+    -ms-animation: fadeIn ease 750ms;
+}
+
+
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
 }
 .scoreboardLabel {
     font-size: 1.5rem;

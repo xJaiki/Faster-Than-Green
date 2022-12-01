@@ -26,6 +26,7 @@
     <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
     <script>navigator.serviceWorker.register("service-worker.js")</script>
     <meta name="theme-color" content="#ffffff">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.14.0/firebase-app.min.js"></script>
 </head>
 
 <body>
@@ -76,9 +77,11 @@
         </div>
         <div class="scoreboard">
             <div class="scoreboardTitle">Scoreboard</div>
-            <div class="scoreboardRow">
+            <div class="scoreboardRowTitle">
                 <div class="scoreboardLabel">Name</div>
                 <div class="scoreboardLabel">Score</div>
+            </div>
+            <div class="scoreboardRow">
             </div>
         </div>
     </div>
@@ -86,7 +89,7 @@
     <div class="scoreboardInputContainer">
         <div class="scoreboardInput">
             <div class="scoreboardInputTitle">Game over!</div>
-            <input class="scoreboardInputField" type="text" id="nameInput">
+            <input class="scoreboardInputField" placeholder="Nickname" type="text" id="nameInput">
             <div class="scoreboardSubmit"> 
                 <div class="scoreboardLabel">Submit</div>
             </div>
@@ -103,6 +106,18 @@
         </div>
     </div>
 </body>
-<script src="script/main.js"></script>
 
+<script type="module" src="script/main.js"></script>
+<script>
+    console.log(`%c
+                                                        \n\
+                  _/            _/  _/        _/        \n\
+                 _/    _/_/_/      _/  _/               \n\
+                _/  _/    _/  _/  _/_/      _/          \n\
+         _/    _/  _/    _/  _/  _/  _/    _/           \n\
+          _/_/      _/_/_/  _/  _/    _/  _/            \n\
+                                                        \n\
+`, "background: #133337; color: #ccc; font-size: 15px;padding: 1px;font-family: monospace;");
+console.log("%c             Why are you here? 🤠👍              ", "background: #133337; color: #ccc; font-size: 15px;padding: 15px;font-family: monospace;");
+</script>
 </html>

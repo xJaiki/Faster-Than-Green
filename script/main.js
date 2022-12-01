@@ -206,7 +206,7 @@ col.addEventListener(input, function (event) {
         randomizeCells(cells, 10)
         startTimer()
         hideScoreboardButton()
-        
+
         setInterval(function () {
             goldSpawner();
         }, 1000)
@@ -264,7 +264,7 @@ function goldSpawner() {
 }
 
 function startTimer() {
-    let time = 20
+    let time = 1
     let timer = setInterval(function () {
         time--
         document.getElementById("timer").innerHTML = time
@@ -376,6 +376,8 @@ function gameReset() {
 }
 function showScoreboardSubmit() {
     let submit = document.querySelector(".scoreboardInputContainer")
+    let scoreboardInput = document.querySelector(".scoreboardInput")
+    let share = document.querySelector(".scoreboardShare")
     let input = document.querySelector(".scoreboardInputField")
     let submitButton = document.querySelector(".scoreboardSubmit")
     submit.style.display = "flex"
@@ -383,11 +385,38 @@ function showScoreboardSubmit() {
     setTimeout(function () {
         input.style.display = "flex"
         submitButton.style.display = "flex"
+        share.style.display = "flex"
         input.classList.add("fadeIn")
         submitButton.classList.add("fadeIn")
+        share.classList.add("fadeIn")
     }, 250)
-
 }
+/*
+let share = document.querySelector(".scoreboardShare")
+share.addEventListener(input, function () {
+    let shareText = "I just scored " + scoreCount + " points in the game 'Faster than green'! Can you beat my score? https://tapgame.jaiki.rocks/"
+    // generate an image of the scoreboard 
+    html2canvas(document.querySelector(".scoreboardContainer")).then(canvas => {
+        let image = canvas.toDataURL("image/png")
+        // share the image and text on twitter
+        window.open("https://twitter.com/intent/tweet?text=" + shareText + "&url=" + image)
+        console.log(image)
+    });
+})
+*/
+
+/*
+function share() {
+    // create an image of the scoreboard and share it
+    html2canvas(document.querySelector(".scoreboardContainer")).then(canvas => {
+        let image = canvas.toDataURL("image/png")
+        let share = document.querySelector(".share")
+        share.href = image
+        share.click()
+    });
+}
+*/
+
 let submitButton = document.querySelector(".scoreboardSubmit")
 let scoreboardInputContainer = document.querySelector(".scoreboardInputContainer")
 

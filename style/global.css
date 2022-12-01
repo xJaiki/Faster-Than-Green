@@ -275,6 +275,13 @@ body {
     padding: 0.5rem;
     border-radius: 15px;
 }
+.scoreboardShare {
+    display:none;
+    background-color: #40ae87 !important;
+    padding: 0.5rem;
+    border-radius: 15px;
+    margin-top : 1rem;
+}
 .scoreboardList {
     display: flex;
     flex-direction: column;
@@ -283,6 +290,17 @@ body {
     width: 100%;
     margin: 0.5rem 0;
     gap: 0.5rem;
+}
+.shareButton {
+    display: none;
+    background-color: #40ae87 !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    background-color: #40ae87;
+    padding: 1rem;
+    border-radius: 15px;
 }
 
 .fadeIn {

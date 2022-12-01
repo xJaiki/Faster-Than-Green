@@ -281,8 +281,8 @@ scoreboardContainer.addEventListener(input, function (event) {
     if (event.target == scoreboardContainer) {
         scoreboardContainer.style.display = "none"
         scoreboardButton.style.display = "flex"
+        cleanScoreboard()
     }
-    cleanScoreboard()
 })
 
 

@@ -209,7 +209,7 @@ col.addEventListener(input, function (event) {
     }
 })
 function startTimer() {
-    let time = 1
+    let time = 20
     let timer = setInterval(function () {
         time--
         document.getElementById("timer").innerHTML = time

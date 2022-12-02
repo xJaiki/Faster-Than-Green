@@ -135,6 +135,7 @@ col.addEventListener(input, function (event) {
             let audio = new Audio("assets/sounds/wrong.mp3")
             audio.play()
             navigator.vibrate(250)
+            screenShake()
         }
         // scoreCount always positive 
         if (scoreCount < 0) {
@@ -144,6 +145,15 @@ col.addEventListener(input, function (event) {
         changeCellStatus(event)
     }
 })
+
+function screenShake() {
+    let gameContainer = document.getElementById("gameContainer")
+    gameContainer.classList.add("shake")
+    setTimeout(function () {
+        gameContainer.classList.remove("shake")
+    }, 100)
+}
+
 
 // ANCHOR: GRID CREATION
 function createGrid(size) {
@@ -247,6 +257,7 @@ function graySpawner() {
     }
 }
 
+
 /**
  * If the cell is clicked, the score is increased by 5 and the cell is changed back to inactive.
  */
@@ -255,8 +266,6 @@ function goldSpawner() {
     if (cells[random].classList.contains("active")) {
         cells[random].classList.add("gold");
     }
-    // if the cell is clicked, the score is increased by 5 and the cell is changed back to inactive
-    // make the cell became inactive after 1 second
     cells[random].addEventListener(input, function (event) {
         if (event.target.classList.contains("gold")) {
             scoreCount += 5;
@@ -268,19 +277,16 @@ function goldSpawner() {
         }
         
     });
-    // if the game is over stop the function
     if (gameOver) {
         return;
     }
 
-    // make the gold cell active after 1 second
     setTimeout(function () {
         if (cells[random].classList.contains("gold")) {
             cells[random].classList.remove("gold");
             cells[random].classList.add("active");
         }
-    }
-        , 500);
+    }, 500);
 
 }
 

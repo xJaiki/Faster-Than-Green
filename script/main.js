@@ -208,7 +208,9 @@ col.addEventListener(input, function (event) {
         hideScoreboardButton()
 
         setInterval(function () {
+            goldSpawner()
         }, 1000)
+
 
         setInterval(function () {
             graySpawner();
@@ -254,6 +256,7 @@ function goldSpawner() {
         cells[random].classList.add("gold");
     }
     // if the cell is clicked, the score is increased by 5 and the cell is changed back to inactive
+    // make the cell became inactive after 1 second
     cells[random].addEventListener(input, function (event) {
         if (event.target.classList.contains("gold")) {
             scoreCount += 5;
@@ -263,11 +266,22 @@ function goldSpawner() {
             let audio = new Audio("assets/sounds/gold.mp3");
             audio.play();
         }
+        
     });
     // if the game is over stop the function
     if (gameOver) {
         return;
     }
+
+    // make the gold cell active after 1 second
+    setTimeout(function () {
+        if (cells[random].classList.contains("gold")) {
+            cells[random].classList.remove("gold");
+            cells[random].classList.add("active");
+        }
+    }
+        , 500);
+
 }
 
 function startTimer() {

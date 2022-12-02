@@ -271,7 +271,7 @@ function goldSpawner() {
 }
 
 function startTimer() {
-    let time = 2
+    let time = 20
     let timer = setInterval(function () {
         time--
         document.getElementById("timer").innerHTML = time
@@ -411,12 +411,12 @@ shareButton.addEventListener(input, function () {
 })
 
 function shareMobile(score){
-    let shareText = "I just scored " + score + " points in the game 'Faster than greem'! Can you beat my score? https://tapgame.jaiki.rocks/"
+    let shareText = "I just scored " + score + " points in the game 'Faster than green'! Can you beat my score? https://tapgame.jaiki.rocks/"
     window.open("whatsapp://send?text=" + shareText)
 }
 
 function share(score) {
-    let shareText = "I just scored " + score + " points in the game 'Faster than greem'! Can you beat my score? https://tapgame.jaiki.rocks/"
+    let shareText = "I just scored " + score + " points in the game 'Faster than green'! Can you beat my score? https://tapgame.jaiki.rocks/"
     navigator.share({
         title: "Faster than green",
         text: shareText,

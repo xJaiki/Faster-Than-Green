@@ -492,7 +492,7 @@ submitButton.addEventListener(input, async function (event) {
         }
     }
 })
-// 
+ 
 
 function amogusCells() {
     // make all cells 

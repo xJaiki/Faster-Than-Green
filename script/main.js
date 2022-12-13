@@ -275,7 +275,7 @@ function goldSpawner() {
             let audio = new Audio("assets/sounds/gold.mp3");
             audio.play();
         }
-        
+
     });
     if (gameOver) {
         return;
@@ -423,14 +423,14 @@ function showScoreboardSubmit() {
 
 let shareButton = document.querySelector(".scoreboardShare")
 shareButton.addEventListener(input, function () {
-    if(input == "touchstart"){
+    if (input == "touchstart") {
         shareMobile(scoreCount)
     } else {
         share(scoreCount)
     }
 })
 
-function shareMobile(score){
+function shareMobile(score) {
     let shareText = "I just scored " + score + " points in the game 'Faster than green'! Can you beat my score? https://tapgame.jaiki.rocks/"
     window.open("whatsapp://send?text=" + shareText)
 }
@@ -492,7 +492,7 @@ submitButton.addEventListener(input, async function (event) {
         }
     }
 })
- 
+
 
 function amogusCells() {
     // make all cells 
@@ -570,5 +570,11 @@ function showDebugMenu() {
 }
 
 function notificattionTest() {
-    let notification = new Notification("Hello World")
+    navigator.serviceWorker.register('../service-worker').then(function (registration) {
+        registration.showNotification('Vibration Sample', {
+            body: 'Buzz! Buzz!',
+            vibrate: [200, 100, 200, 100, 200, 100, 200],
+            tag: 'vibration-sample'
+        });
+    });
 }

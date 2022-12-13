@@ -519,6 +519,7 @@ debugButton.addEventListener("click", function () {
     if (debugCount == 5) {
         showDebugMessage()
         //showDebugMenu()
+        notificattionTest()
     }
 })
 
@@ -538,4 +539,8 @@ function showDebugMenu() {
     debugMenu.addEventListener("click", function () {
         debugMenu.style.display = "none"
     })
+}
+
+function notificattionTest() {
+    let notification = new Notification("Hello World")
 }

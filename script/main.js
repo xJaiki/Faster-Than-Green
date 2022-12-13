@@ -570,11 +570,7 @@ function showDebugMenu() {
 }
 
 function notificattionTest() {
-    navigator.serviceWorker.register('../service-worker.js').then(function (registration) {
-        registration.showNotification('Vibration Sample', {
-            body: 'Buzz! Buzz!',
-            vibrate: [200, 100, 200, 100, 200, 100, 200],
-            tag: 'vibration-sample'
-        });
-    });
+    let notification = new Notification("Test", {
+        body: "This is a test notification"
+    })
 }

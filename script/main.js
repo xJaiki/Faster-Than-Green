@@ -570,7 +570,11 @@ function showDebugMenu() {
 }
 
 function notificattionTest() {
-    let notification = new Notification("Test", {
-        body: "This is a test notification"
+    Notification.requestPermission().then(function (result) {
+        if (result === "granted") {
+            navigator.serviceWorker.ready.then(function (registration) {
+                registration.showNotification("Hello world!")
+            })
+        }
     })
 }

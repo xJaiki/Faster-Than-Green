@@ -24,6 +24,13 @@ or
 Once the application is running on your device or emulator, you can start testing the game.
 Note: that this is a basic steps and it is assumed that you have a react-native project and you have connected your device or emulator to your computer.
 
+
+# Faster Than Green - web version
+
+The web version was is made in pure HTML, CSS, JS as a base idea for the react native version. This version is richer of the react native version in terms of features and design.
+It has a more colorful design, an online leaderboard (made for learning firebase) and more game mechanics as the gold square, that shows up randomly for few milliseconds and gives you 5 points, and grey squares that removes 5 seconds, making the game funnier and more fast peaced in the last seconds.
+All this idea, sooner or later, they will come in the react native version.
+
 ## Contributing
 If you find any bugs or have any suggestions, please feel free to open an issue or submit a pull request.
 
